@@ -1,6 +1,6 @@
 ## Tuya IoTOS Embeded  Demo WiFi & BLE  Smart-Planter
 
-[English] | [中文]
+[中文版](README_zh.md) | [English](README.md)
 
 ## 简介
 
@@ -81,20 +81,20 @@
 
 重要函数：device_init()
 
-+ 调用 tuya_iot_wf_soc_dev_init_param() 接口进行SDK初始化，配置了工作模式、配网模式，同时注册了各种回调函数并存入了固件key和PID。
++ 调用 `tuya_iot_wf_soc_dev_init_param()` 接口进行SDK初始化，配置了工作模式、配网模式，同时注册了各种回调函数并存入了固件key和PID。
 
-+ 调用 tuya_iot_reg_get_wf_nw_stat_cb() 接口注册设备网络状态回调函数。
++ 调用 `tuya_iot_reg_get_wf_nw_stat_cb()` 接口注册设备网络状态回调函数。
 
-+ 调用应用层初始化函数 app_plant_init()
++ 调用应用层初始化函数 `app_plant_init()`
 
   
 
 ### DP点相关
 
-+ 下发dp点数据流：dev_obj_dp_cb() -> deal_dp_proc()
-+ 上报dp点接口: dev_report_dp_json_async()
++ 下发dp点数据流：`dev_obj_dp_cb() -> deal_dp_proc()`
++ 上报dp点接口: `dev_report_dp_json_async()`
 
-| 函数名  | OPERATE_RET dev_report_dp_json_async(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt) |
+| 函数名  | `OPERATE_RET dev_report_dp_json_async(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt) `|
 | ------- | ------------------------------------------------------------ |
 | devid   | 设备id（若为网关、MCU、SOC类设备则devid = NULL;若为子设备，则devid = sub-device_id) |
 | dp_data | dp结构体数组名                                               |
@@ -114,16 +114,12 @@
 
 开发板套件相关详情请参考：[三明治开发套件](https://developer.tuya.com/cn/docs/iot/device-development/tuya-development-board-kit/tuya-sandwich-evaluation-kits/-tuya-sandwich-evaluation-kits?id=K97o0ixytemvr)
 
-
-
-更多详细文档，请参考涂鸦Demo中心：https://developer.tuya.com/cn/demo/smart-planter
-
-
+更多详细文档，请参考涂鸦Demo中心：[https://developer.tuya.com/cn/demo/smart-planter](https://developer.tuya.com/cn/demo/smart-planter)
 
 ## 技术支持
 
 您可以通过以下方法获得涂鸦的支持:
 
-- 开发者中心：https://developer.tuya.com/cn/
-- 帮助中心: https://support.tuya.com/en/help
-- 技术支持工单中心: [https://service.console.tuya.com](https://service.console.tuya.com/)
+- 开发者中心:  [https://developer.tuya.com/cn/] (https://developer.tuya.com/cn/)
+- 帮助中心: [https://support.tuya.com/en/help](https://support.tuya.com/cn/help)
+- 技术支持工单中心:[https://service.console.tuya.com](https://service.console.tuya.com/)
