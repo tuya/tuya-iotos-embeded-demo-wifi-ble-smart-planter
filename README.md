@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This Demo implements a smart WiFi plant grower through the Doodle Smart Cloud Platform, Doodle Smart APP, and IoTOS Embeded WiFi &Ble SDK, using the Doodle WiFi/WiFi+BLE series modules to achieve intelligent functions such as remote control, data monitoring, and remote automatic control.
+This Demo implements a smart WiFi plant grower through the Tuya Smart Cloud Platform, Tuya Smart APP, and IoTOS Embeded WiFi &BLE SDK, using the Tuya WiFi/WiFi+BLE series modules to achieve intelligent functions such as remote control, data monitoring, and remote automatic control.
 
 Implemented functions include.
 
@@ -45,7 +45,7 @@ Implemented functions include.
 
 
 
-### 目录结构
+### Directory & file
 
 ```
 ├── src	
@@ -114,11 +114,11 @@ Important Functions：`device_init()`
 
 For details on the development board kit, please refer to：[Tuya Sandwich Evaluation Kits](https://developer.tuya.com/en/docs/iot/device-development/tuya-development-board-kit/tuya-sandwich-evaluation-kits/-tuya-sandwich-evaluation-kits?id=K97o0ixytemvr)
 
-For more detailed documentation, please refer to the Doodle Demo Center：https://developer.tuya.com/en/demo/smart-planter
+For more detailed documentation, please refer to the Tuya Demo Center：https://developer.tuya.com/en/demo/smart-planter
 
 ## Technical Support
 
-You can get support for Doodle by using the following methods:
+You can get support for Tuya by using the following methods:
 
 - Developer Center：[https://developer.tuya.com/en/](https://developer.tuya.com/en/)
 - Help Center: [https://support.tuya.com/en/help](https://support.tuya.com/en/help)
