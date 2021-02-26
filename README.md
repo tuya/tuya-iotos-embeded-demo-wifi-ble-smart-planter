@@ -1,67 +1,65 @@
-## Tuya IoTOS Embeded  Demo WiFi & BLE  Smart-Planter
+## Tuya IoTOS Embedded Demo WiFi & BLE Indoor Garden
 
-[中文版](README_zh.md)|[English](README.md)
+[中文版](README_zh.md) | [English](README.md)
 
-## Introduction
+## Overview
 
-This Demo implements a smart WiFi plant grower through the Tuya Smart Cloud Platform, Tuya Smart APP, and IoTOS Embeded WiFi &BLE SDK, using the Tuya WiFi/WiFi+BLE series modules to achieve intelligent functions such as remote control, data monitoring, and remote automatic control.
+This Demo describes the implementation of a smart indoor gardan through the Tuya Smart Cloud platform, Tuya Smart app, and IoTOS embedded Wi-Fi and BLE SDK, using the Tuya Wi-Fi and Wi-Fi + BLE series modules to achieve smart functions such as remote control, data monitoring, and remote automatic control.
 
-Implemented functions include.
+Implemented functions:
 
 * Light monitoring
 * Temperature and humidity monitoring
 * Soil moisture monitoring
 * Water level monitoring of water tank
-* Automatic light replenishment
+* Automatic light filling
 * Automatic humidification
-* Automatic heating
+* Automatic humidification
 * Automatic ventilation
 * Automatic filling of water tank
 * Automatic watering
 
 
 
-## Get Started Quickly
+## Quick start
 
-### Download & Compile
+#### Download and compile
 
-- Download [Tuya IoTOS Embeded WiFi & BLE sdk](https://github.com/tuya/tuya-iotos-embeded-sdk-wifi-ble-bk7231t)
+- Download [Tuya IoTOS embedded Wi-Fi & BLE SDK](https://github.com/tuya/tuya-iotos-embeded-sdk-wifi-ble-bk7231t)
 
-- Download the Demo to the apps directory in the SDK directory
+- Download the Demo to apps directory under the SDK directory
 
-  ``` bash
-  $ cd apps
-  $ git clone https://github.com/tuya/tuya-iotos-embeded-demo-wifi-ble-smart-planter
-  ```
+   ```bash
+   $ cd apps
+   $ git clone https://github.com/tuya tuya-iotos-embeded-demo-wifi-ble-smart-planter
+   ```
 
-- Execute the following command in the SDK root directory to start compiling：
+- Execute the following command in the SDK root directory to start compiling:
 
-  ``` bash
-  $ cd ../
-  $ sh build_app.sh apps/tuya-iotos-embeded-demo-wifi-ble-smart-planter tuya-iotos-embeded-demo-wifi-ble-smart-planter 1.0.0
-  ```
+   ```bash
+   $ cd ../
+   $ sh build_app.sh apps/tuya-iotos-embeded-demo-wifi-ble-smart-planter tuya-iotos-embeded-demo-wifi-ble-smart-planter 1.0.0
+   ```
 
-- For license information of firmware download, please refer to：[Wi-Fi + BLE series moduleBurning and Authorization](https://developer.tuya.com/en/docs/iot/device-development/burn-and-authorization/burn-and-authorize-wifi-ble-modules/burn-and-authorize-wb-series-modules?id=Ka78f4pttsytd)
+- For more information about firmware burning authorization, see [Burn and Authorize WB Series Modules](https://developer.tuya.com/en/docs/iot/device-development/burn-and-authorization/burn-and-authorize-wifi-ble-modules/burn-and-authorize-wb-series-modules?id=Ka78f4pttsytd)
 
 
 
-### Directory & file
+#### Directory structure
 
 ```
-├── src	
+├── src  
 |    ├── plant_driver
-|    |        ├── bh1750.c            //BH1750 light sensing module driver
-|    |        ├── rs2255.c            //rs2255 analog switch chip related
-|    |        ├── sht21.c             //SHT21 temperature and humidity sensing module driver
-|    |        └── plant_pwm.c         //Drive light board related, call the soc layer pwm interface 
-                                        for repackaging
-|    ├── plant_soc               //tuya SDK soc layer interface related files
-|    ├── tuya_device.c           //Application entry file
-|    ├── app_plant.c             //Main application layer of plant growth machine
-|    └── plant_control.c         //The control logic of each functional component of the smart planter
-                                   is related
+|    |        ├── bh1750.c            // BH1750 light sensor module drive
+|    |        ├── rs2255.c            // rs2255 analog switch chip related
+|    |        ├── sht21.c             // SHT21 temperature and humidity sensor module driver
+|    |        └── plant_pwm.c         // Driver light board related. Call the PWM API in SoC layer for repackaging 
+|    ├── plant_soc                    // Tuya SDK API file in SoC layer
+|    ├── tuya_device.c                // Application entry file
+|    ├── app_plant.c                  // Main application layer of the smart indoor garden
+|    └── plant_control.c              // The control logic of each functional component of the smart indoor garden
 |
-├── include				//Header file directory
+├── include                           // Header file directory
 |    ├── plant_driver
 |    |        ├── bh1750.h
 |    |        ├── rs2255.h
@@ -72,54 +70,54 @@ Implemented functions include.
 |    ├── app_plant.h
 |    └── plant_control.h
 |
-└── output              //Compilation products
+└── output                            // Compilation output
 ```
 
+#### Demo entry 
 
+Entry file: tuya_device.c
 
-### Demo entrance
+Important function: device_init()
 
-Entrance file：tuya_device.c
++ Call `tuya_iot_wf_soc_dev_init_param()` for SDK initialization to configure working mode and pairing mode, register callback functions, and save the firmware key and PID.
 
-Important Functions：`device_init()`
++ Call `tuya_iot_reg_get_wf_nw_stat_cb()` API to register callback of device network status.
 
-+ Call the `tuya_iot_wf_soc_dev_init_param()` interface to initialize the SDK, configure the operating mode, the mating mode, and register various callback functions and store the firmware key and PID.
-
-+ Calling the `tuya_iot_reg_get_wf_nw_stat_cb()` interface to register the device network status callback functions.
-
-+ Calling the application layer initialization function `app_plant_init()`
-
-### DP related
-
-+ Downstream dp point data: `dev_obj_dp_cb() -> deal_dp_proc()`
-+ Report dp point interface: `dev_report_dp_json_async()`
-
-| Function Name | `OPERATE_RET dev_report_dp_json_async(IN CONST CHAR_T` `*dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt`) |
-| ------------- | ------------------------------------------------------------ |
-| devid         | device id (if gateway, MCU, SOC class device then devid = NULL; if sub-device, then devid = sub-device_id) |
-| dp_data       | dp structure array name                                      |
-| cnt           | Number of elements of the dp structure array                 |
-| Return        | OPRT_OK: Success Other: Failure                              |
++ All the initialization function in application payer `app_plant_init()`
 
 
 
-##### I/O List
+#### DP related
 
-| RS2255 | BH1750   | SHT21    | Liquid level sensor | Soil moisture sensor | Supplementary light board | Humidifier  | Watering pump | Heat lamp   | Fan         | 水箱水泵    |
-| ------ | -------- | -------- | ------------------- | -------------------- | ------------------------- | ----------- | ------------- | ----------- | ----------- | ----------- |
-| `A` P6 | `SDA` P6 | `SDA` P6 | `AO` channel_x1     | `AO` channel_x2      | `PON` P8                  | `Relay` P24 | `Relay` P14   | `Relay` P20 | `Relay` P21 | `Relay` P22 |
-| `B` P7 | `SCL` P7 | `SCL` P7 |                     |                      | `RON` P9                  |             |               |             |             |             |
++ Send DP data flow: `dev_obj_dp_cb() -> deal_dp_proc()`
++ Report DP API: `dev_report_dp_json_async()`
 
-### Evaluation Kits
+| Function name | `OPERATE_RET dev_report_dp_json_async(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt) ` |
+| ------- | ------------------------------------------------------------ |
+| devid | Device ID (devid = NULL if the device is a gateway, MCU, or SoC;  devid = sub-device_id if the device is sub-device) |
+| dp_data | The name of DP struct array |
+| cnt | The number of DP struct arrays. |
+| Return | OPRT_OK: Succeeded  Other: Failed |
 
-For details on the development board kit, please refer to：[Tuya Sandwich Evaluation Kits](https://developer.tuya.com/en/docs/iot/device-development/tuya-development-board-kit/tuya-sandwich-evaluation-kits/-tuya-sandwich-evaluation-kits?id=K97o0ixytemvr)
 
-For more detailed documentation, please refer to the Tuya Demo Center：https://developer.tuya.com/en/demo/smart-planter
 
-## Technical Support
+#### I/O list
 
-You can get support for Tuya by using the following methods:
+| RS2255 | BH1750 | SHT21 | Water level sensor | Soil moisture sensor | Light board | Humidifier | Watering pump | Infrared bulb | Fan | Water tank pump |
+| ------ | -------- | -------- | --------------- | --------------- | -------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| `A` P6 | `SDA` P6 | `SDA` P6 | `AO` channel_x1 | `AO` channel_x2 | `PON` P8 | `Relay` P24 | `Relay` P14 | `Relay` P20 | `Relay` P21 | `Relay` P22 |
+| `B` P7 | `SCL` P7 | `SCL` P7 |  |  | `RON` P9 |  |  |  |  |  |
 
-- Developer Center：[https://developer.tuya.com/en/](https://developer.tuya.com/en/)
-- Help Center: [https://support.tuya.com/en/help](https://support.tuya.com/en/help)
-- Technical Support Console:[https://service.console.tuya.com](https://service.console.tuya.com/)
+#### Evaluation Kits
+
+For more information about SDK, see [Sandwich Evaluation Kits](https://developer.tuya.com/en/docs/iot/device-development/tuya-development-board-kit/tuya-sandwich-evaluation-kits/-tuya-sandwich-evaluation-kits?id=K97o0ixytemvr)
+
+For detailed documentation, see [Fully-Functional Smart Indoor ](https://developer.tuya.com/en/demo/smart-planter)
+
+## Technical support
+
+You can get support from Tuya through the following accesses: 
+
+- [Tuya IoT Developer Platform](https://developer.tuya.com/en/)
+- [Tuya Smart Help Center](https://support.tuya.com/en/help)
+- [Service & Support](https://service.console.tuya.com/)
