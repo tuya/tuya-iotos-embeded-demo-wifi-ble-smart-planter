@@ -1,10 +1,10 @@
-## Tuya IoTOS Embedded Demo Wi-Fi and BLE Indoor Garden
+## Tuya IoTOS Embedded Wi-Fi and BLE Demo Indoor Garden
 
 [中文版](README_zh.md) | [English](README.md)
 
 ## Overview
 
-This Demo describes the implementation of a smart indoor gardan through the Tuya Smart Cloud platform, Tuya Smart app, and IoTOS embedded Wi-Fi and BLE SDK, using the Tuya Wi-Fi and Wi-Fi + BLE series modules to achieve smart functions such as remote control, data monitoring, and remote automatic control.
+This Demo describes the implementation of a smart indoor garden through the Tuya Smart Cloud platform, Tuya Smart app, and IoTOS embedded Wi-Fi and BLE SDK, using the Tuya Wi-Fi and Wi-Fi + BLE series modules to achieve smart functions such as remote control, data monitoring, and remote automatic control.
 
 Implemented functions:
 
