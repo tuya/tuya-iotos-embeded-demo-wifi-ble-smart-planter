@@ -29,17 +29,17 @@ Implemented functions:
 
 - Download the Demo to apps directory under the SDK directory
 
-   ```bash
-   $ cd apps
-   $ git clone https://github.com/tuya tuya-iotos-embeded-demo-wifi-ble-smart-planter
-   ```
+  ``` bash
+  $ cd apps
+  $ git clone https://github.com/tuya/tuya-iotos-embeded-demo-wifi-ble-smart-planter
+  ```
 
 - Execute the following command in the SDK root directory to start compiling:
 
-   ```bash
-   $ cd ../
-   $ sh build_app.sh apps/tuya-iotos-embeded-demo-wifi-ble-smart-planter tuya-iotos-embeded-demo-wifi-ble-smart-planter 1.0.0
-   ```
+  ``` bash
+  $ cd ../
+  $ sh build_app.sh apps/tuya-iotos-embeded-demo-wifi-ble-smart-planter tuya-iotos-embeded-demo-wifi-ble-smart-planter 1.0.0
+  ```
 
 - For more information about firmware burning authorization, see [Burn and Authorize WB Series Modules](https://developer.tuya.com/en/docs/iot/device-development/burn-and-authorization/burn-and-authorize-wifi-ble-modules/burn-and-authorize-wb-series-modules?id=Ka78f4pttsytd)
 
@@ -75,16 +75,16 @@ Implemented functions:
 
 #### Demo entry 
 
-Entry file: tuya_device.c
+Entrance file：tuya_device.c
 
-Important function: device_init()
+Important Functions：`device_init()`
 
-+ Call `tuya_iot_wf_soc_dev_init_param()` for SDK initialization to configure working mode and pairing mode, register callback functions, and save the firmware key and PID.
++ Call the `tuya_iot_wf_soc_dev_init_param()` interface to initialize the SDK, 
++ configure the operating mode, the mating mode, and register various callback 
++ functions and store the firmware key and PID.
 
-+ Call `tuya_iot_reg_get_wf_nw_stat_cb()` API to register callback of device network status.
-
-+ All the initialization function in application payer `app_plant_init()`
-
++ Calling the `tuya_iot_reg_get_wf_nw_stat_cb()` interface to register the device network status callback functions.
++ Calling the application layer initialization function `app_plant_init()`
 
 
 #### DP related
@@ -92,7 +92,8 @@ Important function: device_init()
 + Send DP data flow: `dev_obj_dp_cb() -> deal_dp_proc()`
 + Report DP API: `dev_report_dp_json_async()`
 
-| Function name | `OPERATE_RET dev_report_dp_json_async(IN CONST CHAR_T *dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt) ` |
+| Function name | `OPERATE_RET dev_report_dp_json_async(IN CONST CHAR_T` 
+`*dev_id,IN CONST TY_OBJ_DP_S *dp_data,IN CONST UINT_T cnt`) |
 | ------- | ------------------------------------------------------------ |
 | devid | Device ID (devid = NULL if the device is a gateway, MCU, or SoC;  devid = sub-device_id if the device is sub-device) |
 | dp_data | The name of DP struct array |
