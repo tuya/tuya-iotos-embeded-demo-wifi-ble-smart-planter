@@ -1,4 +1,4 @@
-## Tuya IoTOS Embedded Demo WiFi & BLE Indoor Garden
+## Tuya IoTOS Embedded Demo Wi-Fi and BLE Indoor Garden
 
 [中文版](README_zh.md) | [English](README.md)
 
